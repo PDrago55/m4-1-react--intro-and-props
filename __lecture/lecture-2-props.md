@@ -101,6 +101,20 @@ function VideoPlayer(props) {
     </div>
   );
 }
+
+
+function VideoPlayer(props) {
+  return (
+    <div>
+      <video
+        src={props.videoUrl}
+        width={props.width}
+        height={props.height}
+      />
+      <p>{desc}</p>
+    </div>
+  );
+}
 ```
 
 ---
@@ -127,6 +141,29 @@ function Tweet(props) {
     </div>
   );
 }
+////////////////////////////////using props
+
+function Tweet(props) {
+  return (
+    <div>
+      <Avatar src={props.src} />
+      <div>
+        <p>
+          <span className="user-name">{props.userName}</span>
+          <span className="handle">{props.hanle}</span>
+          <span className="date">{props.date}</span>
+        </p>
+        <p>{desc}</p>
+        <div>
+          <button>Reply</button>
+          <button>Retweet</button>
+          <button>Like</button>
+          <button>Share</button>
+        </div>
+      </div>
+    </div>
+  );
+}
 ```
 
 ---
@@ -140,6 +177,19 @@ function Header(props) {
       <nav>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
+      </nav>
+    </header>
+  );
+}
+
+ function Header(props) {
+  return (
+    <header>
+      <h1>{props.title}</h1>
+
+      <nav>
+        <a href={props.nav.first.url}>{props.nav.first.label}</a>
+        <a href={props.nav.second.url}>{props.nav.second.label}</a>
       </nav>
     </header>
   );
@@ -213,7 +263,7 @@ const storeItems = [
   { id: 'c', price: 44.99, name: 'Top Hat' },
 ];
 
-function App(props) {
+function App() {
   return (
     <div>
       {storeItems.map(item => (
@@ -256,6 +306,16 @@ const pets = [
 </div>;
 ```
 
+function app() {
+  return (
+    <div>
+    {pets.map(pet => (
+        <PetInfo name={pet.name} age={pet.age} species={pet.species} breed={pet.breed}/>
+    ))}
+    </div>
+  )
+} 
+
 ---
 
 ```jsx
@@ -292,4 +352,15 @@ const pizzaToppings = [
 
 Hint: You'll need `filter` as well as `map`
 
+pizzaToppings.maps(topping => (
+    if(topping.isVegetarien = true){
+      topping.filter(isVegetarien)
+    } else {
+      //fuck off
+    }
+<Pizza>
+    {pizzaToppings.filter(topping => topping.isVegetarian) //.filter automatically assumes and looks for truth and returns on the true items
+    .map(topping => <Topping name={topping.name}/>)
+    }
+</Pizza>
 ---

@@ -1,0 +1,50 @@
+.chat-message{
+display: flex;
+align-items: center;
+padding: 55px;
+}
+
+.place{
+/* display: inline; */
+}
+
+.image{
+    border-radius: 50px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    border: 2px red solid;
+}
+.texts-user{
+    box-shadow: blue;
+    color: white;
+    padding: 25px;
+    border-radius: 50px;
+    background-color: blue;
+    position: relative;
+}
+.user{
+    font-size: 1.5rem;
+    font-family: monospace;
+    font-style: italic;
+    padding: 10px;
+    position: absolute;
+    margin-top: -50px;
+    margin-left: 50px;
+}
+
+.texts{
+    box-shadow: lightgray;
+    padding: 25px;
+    border-radius: 50px;
+    background-color: rgb(224, 221, 221);
+}
+
+.container-sent{
+    display: flex;
+    justify-content: center;
+    /* position: relative;
+    margin-left: 550px; */
+}
