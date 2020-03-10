@@ -78,7 +78,7 @@ render(
 ### Compiling JSX to JS
 
 ```js
-// Before
+// Before --- this is what we type
 function GoButton(props) {
   return (
     <button className="btn" onClick={props.handleClick}>
@@ -87,7 +87,7 @@ function GoButton(props) {
   );
 }
 
-// After
+// After --- this is what react does...
 function GoButton(props) {
   return React.createElement(
     'button',
@@ -123,7 +123,7 @@ HTML:
 ```
 
 JSX:
-
+we still have tags but the attributes don't always have same labels
 ```jsx
 <h1 className="title">Hello</h1>
 <label htmlFor="name-selector">Select your name</label>
@@ -134,20 +134,21 @@ JSX:
 # Squigglies { }
 
 A _slot_ in which we can write JavaScript expressions.
-
+ this could be a variable name or a function
 ---
 
 ```jsx
 let index = 0;
 
-<div id={'item-' + index} />;
+<div id={`item- ${index}`} />;
+// if this is just a string... we dont need the outside curly braces as we are not calling a function or embedding JS
 ```
 
 ---
 
 ```jsx live=true
 const awakeStudents = 10;
-const asleepStudents = 0;
+const asleepStudents = 2;
 
 render(
   <div>
@@ -155,14 +156,18 @@ render(
   </div>
 );
 ```
-
+answer: there are 12 students in the class.. the squigglies add both variables together..
 ---
 
 ```jsx
 <li className={isOnline && 'green'}>{user.username}</li>
+//or..
+<li className={isOnline ? 'green' : ""}>{user.username}</li>
 
 // ⚠️ New notation! another way to use of &&.
+// if isOnline = true && 'green'> create/display or do something with user.username
 ```
+
 
 ---
 
@@ -178,6 +183,12 @@ let age = 10;
   <img src={birthdayCakeImage} />
   <p>Happy {age}th birthday!</p>
 </div>;
+
+//html version of the jsx code above
+<div class="wrapper">
+<img src="/images/cake.jpg" alt="cake"></img>
+  <p>Happy 10th Birthday!</p>
+</div>
 ```
 
 ---
@@ -193,9 +204,16 @@ let agreeToTerms = false;
   </label>
 
   {agreeToTerms && (
-    <div>YOUR SOUL BELONGS TO ME MWAHAHAHAHAAAAAAHHHHHH!!!1</div>
+    <div>YOUR SOUL BELONGS TO ME MWAHAHAHAHAAAAAAHHHHHH!!!!</div>
   )}
 </div>;
+
+//html version
+<div>
+<label method="POST" for="terms-of-service">
+<input type="checkbox" id="terms-of-service"></input>I agree to the terms
+</label>
+</div>
 ```
 
 ---
@@ -219,10 +237,10 @@ const pets = [
 ];
 
 <div>
-  <h1 className="title">My pets:</h1>
+  <h1 class="title">My pets:</h1>
   <ul>
     <li>
-      <h3>{pets[0].name}</h3>
+      <h3>Bark Obama</h3>
       <table>
         <thead>
           <tr>
@@ -233,16 +251,16 @@ const pets = [
         </thead>
         <tbody>
           <tr>
-            <td>{pets[0].age}</td>
-            <td>{pets[0].species}</td>
-            <td>{pets[0].breed}</td>
+            <td>3</td>
+            <td>dog</td>
+            <td>Labradoodle</td>
           </tr>
         </tbody>
       </table>
     </li>
 
     <li>
-      <h3>{pets[1].name}</h3>
+      <h3>Chairman Meow</h3>
       <table>
         <thead>
           <tr>
@@ -253,15 +271,15 @@ const pets = [
         </thead>
         <tbody>
           <tr>
-            <td>{pets[1].age}</td>
-            <td>{pets[1].species}</td>
-            <td>{pets[1].breed}</td>
+            <td>8</td>
+            <td>cat</td>
+            <td>ragdoll</td>
           </tr>
         </tbody>
       </table>
     </li>
   </ul>
-</div>;
+</div>
 ```
 
 ---
@@ -298,12 +316,13 @@ ReactDOM.render(
 </html>
 ```
 
+
 **Everything** else gets created by React.
 
 ---
 
 # React Components
-
+- componenet implies that it is reusable in other parts of your code
 - "Custom supercharged HTML elements"
 - Allows us to avoid duplication (like in the pets example)
 
@@ -315,7 +334,8 @@ Now it fits on the screen:
 <div>
   <h1 className="title">My pets:</h1>
   <ul>
-    <PetInfo
+    <PetInfo //---- all components have capitalized first letters
+              // components have self closing tags
       name={pet[0].name}
       age={pet[0].age}
       species={pet[0].species}
